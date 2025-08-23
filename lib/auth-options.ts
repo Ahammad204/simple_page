@@ -10,6 +10,6 @@ export const authOptions: NextAuthOptions = {
     // You can add CredentialsProvider here later if you want email/password.
   ],
   session: { strategy: "jwt" },
-  pages: { signIn: "/login" }, // our custom login page
+  // pages: { signIn: "/login" }, // our custom login page
   secret: process.env.NEXTAUTH_SECRET,
 };
