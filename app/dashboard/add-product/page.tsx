@@ -3,7 +3,7 @@
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
-import { useSession, signIn } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 
 type FormValues = { name: string; description: string; price: number };
@@ -14,9 +14,13 @@ export default function AddProductPage() {
   const [loading, setLoading] = useState(false);
   const { register, handleSubmit, reset } = useForm<FormValues>();
 
-  useEffect(() => {
-    if (status === "unauthenticated") signIn(undefined, { callbackUrl: "/products" });
-  }, [status]);
+useEffect(() => {
+  if (status === "unauthenticated") {
+    // Use a separate page for login callback
+    router.push("/login");
+  }
+}, [status, router]);
+
 
   const onSubmit = async (data: FormValues) => {
     try {
